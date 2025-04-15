@@ -27,7 +27,7 @@ def setup_driver():
     # Add user data directory to maintain session/cookies
     options.add_argument(f"--user-data-dir={SESSION_DIR}")
     
-    # Make browser less detectable
+    # To Make browser less detectable
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_argument("--disable-extensions")
     options.add_argument("--no-sandbox")
@@ -35,14 +35,14 @@ def setup_driver():
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--window-size=1920,1080")
     
-    # Use a realistic user agent
+    # To use a realistic user agent
     options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36")
     
     
-    # Initialize with undetected-chromedriver which helps bypass Cloudflare
+    # This initialize with undetected-chromedriver which helps bypass Cloudflare
     driver = uc.Chrome(options=options)
     
-    # Set page load timeout
+    # To set page load timeout
     driver.set_page_load_timeout(30)
     
     return driver
@@ -56,7 +56,7 @@ def human_like_scroll(driver):
     total_height = driver.execute_script("return document.body.scrollHeight")
     viewport_height = driver.execute_script("return window.innerHeight")
     
-    # Scroll down in small increments with random pauses
+    # To scroll down in small increments with random pauses
     current_position = 0
     while current_position < total_height:
         scroll_increment = random.randint(100, 800)
@@ -104,7 +104,7 @@ def scrape_page(driver, scraped_data):
                 date = item.find_element(By.CLASS_NAME, 'post-date').text
                 excerpt = item.find_element(By.TAG_NAME, 'p').text
                 
-                # Check if this item is already in scraped_data to avoid duplicates
+                # To check if this item is already in scraped_data to avoid duplicates
                 if not any(title == row[0] for row in scraped_data):
                     scraped_data.append([title, author, date, excerpt])
                     print(f"Added article: {title[:50]}...")
